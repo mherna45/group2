@@ -34,7 +34,9 @@
 
 	<!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
 	<style>
-      
+      body {
+		  text-align: center;
+      }
 	</style>
 	<!--END OF YOUR OWN CSS-->
 </head >
@@ -42,24 +44,30 @@
 	<h1>Survey Pro</h1>
 	<form action="action_page.php" method="post">
 		<div class="imgcontainer">
-			<img src="" alt="" >
+			<img src="" alt="">
 		</div>
 
 		<div class="container">
-			<label for="username"><b>Username</b></label>
 			<input type="text" placeholder="Enter Username" name="username" required>
-
-			<label for="psw"><b>Password</b></label>
+		</div>
+		<br />
+		<div>
 			<input type="password" placeholder="Enter Password" name="psw" required>
-
+		</div>
+		<br />
+		<div>
 			<button type="submit">Login</button>
+		</div>
+		<br />
+		<div>
 			<label>
 				<input type="checkbox" checked="checked" name="remember"> Remember me
 			</label>
 		</div>
+		<br />
 
 		<div class="container">
-			<button type="button" class="cancelbtn">Cancel</button>
+			<!--<button type="button" class="cancelbtn">Cancel</button>-->
 			<span class="psw">Forgot <a href="#">password?</a></span>
 		</div>
 	</form>
