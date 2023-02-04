@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title></title>
+	<title>Devil Developers</title>
 	<!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -62,7 +62,13 @@
 
 	<!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
 	<style>
+		form {
+			text-align: center;
 
+		}
+		#newAccount {
+			text
+		}
 	</style>
 	<!--END OF YOUR OWN CSS-->
 </head >
@@ -75,13 +81,23 @@
 			<div class="logonBox">
 				<form onsubmit="LogOn($('#logonId').val(), $('#logonPassword').val()); return false;">
 					<div>
-						<input type="text" id="logonId" placeholder="Username"/>
-						<input type="password" id="logonPassword" placeholder="Password"/>
+						<input type="text" id="logonId" placeholder="Username" />
+					</div>
+					<br />
+					<div>
+						<input type="password" id="logonPassword" placeholder="Password" />
+					</div>
+					<br />
+					<div>
 						<button type="submit">Log In</button>
 					</div>
 					<br />
 					<div>
-						<button type="submit">Create Account</button>
+						<a href="">Forgot Password</a>
+					</div>
+					<br />
+					<div>
+						<button id="newAccount" type="submit">Create Account</button>
 					</div>
 				</form>
 
