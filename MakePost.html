@@ -108,7 +108,9 @@
     <input type="text" id="title" placeholder="Enter title">
     <h3><label for="content">Description:</label></h3>
     <textarea id="content" placeholder="Enter content"></textarea>
-    <label for="file"><h3>Media</h3> (Image / Video):</label>
+    <label for="file">
+      <h3>Media</h3> (Image / Video):
+    </label>
     <input type="file" id="file" accept="image/*">
     <br><br>
     <button type="button" onclick="showPopup()">Submit</button>
@@ -118,10 +120,28 @@
   <div id="myPopup" class="popup">
     <div class="popup-content">
       <span class="close" onclick="hidePopup()">&times;</span>
-      <p><h1>Submit Post?</h1>
-      <p><strong><h2>Title: </h2></strong><span id="displayTitle"></span></p>
+      <p>
+      <h1>Submit Post?</h1>
+      <p><strong>
+          <h2>Title: </h2>
+        </strong><span id="displayTitle"></span></p>
       <p><strong>Content: </strong><span id="displayContent"></span></p>
       <p><strong>File: </strong><span id="displayFile"></span></p>
+      <button type="button" onclick="showPopup2(), hidePopup()">Post!</button>
+      <!-- Button click Hide pop-up(s) to be replaced with post to feed when we have a feed -->
+    </div>
+  </div>
+
+  <div id="myPopup2" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="hidePopup()">&times;</span>
+      <p><strong>
+          <h2>Post Submitted!</h2>
+        </strong><span id="displaySuccess"></span></p>
+      <p>Submission Successful as of:</p>
+      <p id="time"></p>
+      <button type="button" onclick="hidePopup2(), hidePopup()">Return to Feed</button>
+      <!-- Hide pop-up(s) to be replaced with return to feed when we have a feed -->
     </div>
   </div>
 
@@ -132,6 +152,7 @@
       var title = document.getElementById("title").value;
       var content = document.getElementById("content").value;
       var file = document.getElementById("file").value;
+
 
       // Display the input values in the pop-up
       document.getElementById("displayTitle").innerHTML = title;
@@ -149,6 +170,33 @@
       var popup = document.getElementById("myPopup");
       popup.style.display = "none";
     }
+
+    function showPopup2() {
+      // Get the input values
+      var title = document.getElementById("title").value;
+      var content = document.getElementById("content").value;
+      var file = document.getElementById("file").value;
+
+
+      // Display the input values in the pop-up
+      document.getElementById("displayTitle").innerHTML = title;
+      document.getElementById("displayContent").innerHTML = content;
+      document.getElementById("displayFile").innerHTML = file;
+
+      // Show the
+      // Show the pop-up
+      var popup = document.getElementById("myPopup2");
+      popup.style.display = "block";
+    }
+
+    function hidePopup2() {
+      // Hide the pop-up
+      var popup = document.getElementById("myPopup2");
+      popup.style.display = "none";
+    }
+
+    const d = new Date();
+    document.getElementById("time").innerHTML = d;
   </script>
 </body>
 
