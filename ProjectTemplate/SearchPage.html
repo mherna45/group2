@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Search</title>
+  <style>
+    h1 {
+      color: darkred;
+      font-size: 50px;
+      font-family: 'Times New Roman';
+      text-align: center;
+    }
+
+    body {
+      background-color: cornsilk;
+      text-align: center;
+      list-style: none;
+    }
+
+    ul {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      list-style: none;
+    }
+
+    .resize {
+      width: 20em;
+      height: 10em;
+    }
+
+    #title {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #content {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #media {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #submit {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .resultscrn {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      background-color: white;
+      border: 1px solid gray;
+      padding: 10px;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Search Posts or Users</h1>
+  <!--Search bar-->
+  <h4><strong>Enter a word or phrase into the search bar and click search!</strong></h4>
+  <form>
+    <input type="text" id="Input" placeholder="Search...">
+    <input type="button" value="Search" onclick="search()">
+  </form>
+  <!--Results return window form/search functionality-->
+  <div class="resultscrn" id="result"></div>
+  <script>
+    function search() {
+      var input, filter, ul, li, a, i;
+      input = document.getElementById("Input");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("list");
+      li = ul.getElementsByTagName("li");
+      for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          li[i].style.display = "";
+        } else {
+          li[i].style.display = "none";
+        }
+      }
+      var resultscrn = document.getElementById("result");
+      resultscrn.innerHTML = "";
+      for (i = 0; i < li.length; i++) {
+        if (li[i].style.display == "") {
+          resultscrn.innerHTML += "<p>" + li[i].innerHTML + "</p>";
+        }
+      }
+      if (resultscrn.innerHTML == "") {
+        resultscrn.style.display = "none";
+      } else {
+        resultscrn.style.display = "none";
+      }
+    }
+
+  </script>
+  <!-- This needs to be tied into the users DB and post feed in order to properly search results and list them. Leaving the fruit list for the time being -->
+  <p>Currently we don't have the post history and User Database linked so here are some fruits</p>
+  <ul id="list">
+    <li><a href="#">Apple</a></li>
+    <li><a href="#">Banana</a></li>
+    <li><a href="#">Cherry</a></li>
+    <li><a href="#">Date</a></li>
+    <li><a href="#">Eggplant</a></li>
+    <li><a href="#">Fig</a></li>
+  </ul>
+  <!--For connecting SQL
+  <ul>
+		<?php
+			// Connect to the database
+			$host = "localhost";
+			$user = "username";
+			$password = "password";
+			$database = "database";
+
+			$conn = mysqli_connect($host, $user, $password, $database);
+			if (!$conn) {
+				die("Connection failed: " . mysqli_connect_error());
+			}
+
+			// Retrieve the data
+			$sql = "SELECT * FROM users";
+			$result = mysqli_query($conn, $sql);
+
+			// Generate the HTML code
+			while ($row = mysqli_fetch_assoc($result)) {
+				echo "<li>" . $row["name"] . "</li>";
+			}
+
+			// Close the connection
+			mysqli_close($conn);
+		?>
+	</ul> -->
+</body>
+</html>
