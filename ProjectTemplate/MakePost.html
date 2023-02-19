@@ -128,6 +128,9 @@
       <p><strong>Content: </strong><span id="displayContent"></span></p>
       <p><strong>File: </strong><span id="displayFile"></span></p>
       <button type="button" onclick="showPopup2(), hidePopup()">Post!</button>
+      <button type="button" onclick="showPopup4(), hidePopup()">Comment</button>
+      <button type="button" onclick="hidePopup2(), hidePopup()">Edit</button>
+      <button type="button" onclick="deletePost(), hidePopup()">Delete</button>
       <!-- Button click Hide pop-up(s) to be replaced with post to feed when we have a feed -->
     </div>
   </div>
@@ -141,6 +144,34 @@
       <p>Submission Successful as of:</p>
       <p id="time"></p>
       <button type="button" onclick="hidePopup2(), hidePopup()">Return to Feed</button>
+      <!-- Hide pop-up(s) to be replaced with return to feed when we have a feed -->
+    </div>
+  </div>
+
+  <div id="myPopup4" class="popup">
+      <div class="popup-content">
+          <span class="close" onclick="hidePopup()">&times;</span>
+          <p><strong>
+        
+
+            <textarea id="content" placeholder="Enter content"></textarea>
+            <label for="file">
+            <p>Add Media:</p>
+            <input type="file" id="file" accept="image/*">
+            <br><br>
+            <button type="button" onclick="hideDelete(), hidePopup2(), hidePopup(), hidePopup4()">Submit</button>
+            
+          </strong></p>
+      </div>
+  </div>
+  
+  <div id="myPopup3" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="hidePopup1()">&times;</span>
+      <p><strong>
+          <h2>Permanent delete?</h2>    
+        <button type="button" onclick="hideDelete(), hidePopup2(), hidePopup()">Delete</button>
+        <button type="button" onclick="hideDelete()">Cancel</button>
       <!-- Hide pop-up(s) to be replaced with return to feed when we have a feed -->
     </div>
   </div>
@@ -194,9 +225,56 @@
       var popup = document.getElementById("myPopup2");
       popup.style.display = "none";
     }
+    
+    function deletePost() {
+      // Get the input values
+      var title = document.getElementById("title").value;
+      var content = document.getElementById("content").value;
+      var file = document.getElementById("file").value;
+
+
+      // Display the input values in the pop-up
+      document.getElementById("displayTitle").innerHTML = title;
+      document.getElementById("displayContent").innerHTML = content;
+      document.getElementById("displayFile").innerHTML = file;
+
+      // Show the
+      // Show the pop-up
+      var popup = document.getElementById("myPopup3");
+      popup.style.display = "block";
+      
+    }
+    function hideDelete() {
+      // Hide the pop-up
+      var popup = document.getElementById("myPopup3");
+      popup.style.display = "none";
+    }
+
+    function showPopup4() {
+        // Get the input values
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+        var file = document.getElementById("file").value;
+
+
+        // Display the input values in the pop-up
+        document.getElementById("displayTitle").innerHTML = title;
+        document.getElementById("displayContent").innerHTML = content;
+        document.getElementById("displayFile").innerHTML = file;
+
+        // Show the
+        // Show the pop-up
+        var popup = document.getElementById("myPopup4");
+        popup.style.display = "block";
+    }
+    function hidePopup4() {
+        // Hide the pop-up
+        var popup = document.getElementById("myPopup4");
+        popup.style.display = "none";
+        }
 
     const d = new Date();
-    document.getElementById("time").innerHTML = d;
+    document.get3ElementById("time").innerHTML = d;
   </script>
 </body>
 
