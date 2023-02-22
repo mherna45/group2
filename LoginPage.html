@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!--DO NOT FORGET THIS SCRIPT TAG SO YOU CAN USE JQUERY!!!!!-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!--YOUR OWN JAVASCRIPT CAN GO RIGHT HERE-->
+	<script type="text/javascript">
+		function TestButtonHandler() {
+			var webMethod = "ProjectServices.asmx/LogOn";
+			var parameters = "{}";
+
+			//jQuery ajax method
+			$.ajax({
+				type: "POST",
+				url: webMethod,
+				data: parameters,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (msg) {
+					var responseFromServer = msg.d;
+					alert(responseFromServer);
+				},
+				error: function (e) {
+					alert("this code will only execute if javascript is unable to access the webservice");
+				}
+
+			});
+		}
+	</script>
+	<!--END OF YOUR OWN JAVASCRIPT-->
+
+	<!--AND YOUR OWN CSS CAN GO HERE AS WELL-->
+	<style>
+        body {
+            background-color: cornsilk;
+            text-align: center;
+        }
+	</style>
+	<!--END OF YOUR OWN CSS-->
+</head >
+<body>
+	<h1>Survey Pro</h1>
+	<form action="action_page.php" method="post">
+		<div class="imgcontainer">
+			<img src="" alt="">
+		</div>
+
+		<div class="container">
+			<input type="text" placeholder="Enter Username" name="username" required>
+		</div>
+		<br />
+		<div>
+			<input type="password" placeholder="Enter Password" name="psw" required>
+		</div>
+		<br />
+		<div>
+			<label>
+				<input type="checkbox" checked="checked" name="remember"> Remember me
+			</label>
+		</div>
+		<br />
+		<div>
+			<button type="submit">Login</button>
+		</div>
+		<br />
+		<div>
+			<button onclick="location.href='Registration.html'" type="submit">Create New Account</button>
+		</div>
+		<br />
+		<div class="container">
+			<!--<button type="button" class="cancelbtn">Cancel</button>-->
+			<a class="psw" href='ResetPassword.html'>Forgot Password</a>
+			
+		</div>
+	</form>
+</body>
+</html >
