@@ -75,8 +75,29 @@
       <p>Votes: <span id="voteCount">0</span></p>
       <input type="button" id="thumbsUpBtn" value="👍" onclick="vote(1)">
       <input type="button" id="thumbsDownBtn" value="👎" onclick="vote(-1)">
+      <div id="myPopup" class="popup">
+        <div class="popup-content">
+          <span class="close" onclick="hidePopup()">&times;</span>
+        </div>
     </div>
-    <p id="feedback"></p>
+    
+    <div id="myPopup4" class="popup">
+      <div class="popup-content">
+          <span class="close" onclick="hidePopup()">&times;</span>
+          <p><strong>
+        
+            <h1>Comment:</h1>
+            <textarea id="content" placeholder="Enter content"></textarea>
+            <label for="file">
+            <p>Add Media:</p>
+            <input type="file" id="file" accept="image/*">
+            <br><br>
+            <button type="button" onclick="hideDelete(), hidePopup2(), hidePopup(), hidePopup4()">Submit</button>
+            
+          </strong></p>
+      </div>
+  </div>
+    
     <script>
       var vote
       var voteCount = 0;
