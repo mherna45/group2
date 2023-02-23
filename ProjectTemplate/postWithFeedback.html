@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create a New Post</title>
+    <style>
+      form {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px #ccc;
+      }
+      label {
+        width: 100px;
+        display: inline-block;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px #ccc;
+        font-size: 16px;
+      }
+      input[type="button"] {
+        padding: 10px 20px;
+        background-color: lightblue;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #post {
+        width: 50%;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px #ccc;
+        text-align: center;
+      }
+      #post h2 {
+        margin-bottom: 20px;
+      }
+      #message, #feedback {
+        width: 50%;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px #ccc;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Create a New Post</h1>
+    <form>
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required><br><br>
+      <label for="body">Body:</label>
+      <textarea id="body" name="body" rows="5" required></textarea><br><br>
+      <input type="button" value="Submit" onclick="createPost()">
+    </form>
+    <p id="message"></p>
+    <div id="post" style="display: none;">
+      <h2 id="postTitle"></h2>
+      <p id="postBody"></p>
+      <p>Votes: <span id="voteCount">0</span></p>
+      <input type="button" id="thumbsUpBtn" value="👍" onclick="vote(1)">
+      <input type="button" id="thumbsDownBtn" value="👎" onclick="vote(-1)">
+    </div>
+    <p id="feedback"></p>
+    <script>
+      var vote
+      var voteCount = 0;
+      var userVoted = false;
+
+      function createPost() {
+        var title = document.getElementById("title").value;
+        var body = document.getElementById("body").value;
+
+        if (title && body) {
+          document.getElementById("postTitle").innerHTML = title;
+          document.getElementById("postBody").innerHTML = body;
+          document.getElementById("post").style.display = "block";
+          document.getElementById("message").innerHTML = "";
+        } else {
+          document.getElementById("message").innerHTML = "Title and Body are required to create a post.";
+        }
+      }
+      
+      function vote(val) {
+        if (!userVoted) {
+          voteCount += val;
+          userVoted = true;
+          document.getElementById("voteCount").innerHTML = voteCount;
+          document.getElementById("feedback").innerHTML = "Your vote has been cast!";
+        } else {
+          document.getElementById("feedback").innerHTML = "You have already voted on this post.";
+        }
+      }
+
+      function revertVote() {
+        if (userVoted) {
+          voteCount -= voteCount;
+          userVoted = false;
+          document.getElementById("voteCount").innerHTML = voteCount;
+          document.getElementById("feedback").innerHTML = "Your vote has been revoked.";
+        } else {
+          document.getElementById("feedback").innerHTML = "You haven't voted on this post.";
+        }
+      }
+    </script>
+  </body>
+</html>
