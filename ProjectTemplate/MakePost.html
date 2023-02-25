@@ -284,91 +284,10 @@
         popup.style.display = "block";
     }
     function hidePopup4() {
-        // Hide the pop-up
-        var popup = document.getElementById("myPopup4");
-        popup.style.display = "none";
-        }
-    
-    // Get the thumb-up and thumb-down buttons
-        const thumbUpBtn = document.getElementById('thumb-up');
-        const thumbDownBtn = document.getElementById('thumb-down');
-      
-        // Get the thumb-up and thumb-down counts
-        const thumbUpCount = document.getElementById('thumb-up-count');
-        const thumbDownCount = document.getElementById('thumb-down-count');
-      
-        // Set initial values for the post rating
-        let thumbUp = 0;
-        let thumbDown = 0;
-      
-        // Check if the user has already voted
-        const hasVoted = localStorage.getItem('hasVoted');
-        if (hasVoted) {
-          const vote = localStorage.getItem('vote');
-          if (vote === 'thumb-up') {
-            thumbUp++;
-            thumbUpCount.innerText = thumbUp;
-            thumbUpBtn.classList.add('voted');
-            thumbDownBtn.disabled = true;
-          } else if (vote === 'thumb-down') {
-            thumbDown++;
-            thumbDownCount.innerText = thumbDown;
-            thumbDownBtn.classList.add('voted');
-            thumbUpBtn.disabled = true;
-          }
-        }
-      
-        // Add click event listeners to the thumb-up and thumb-down buttons
-        thumbUpBtn.addEventListener('click', () => {
-          if (thumbUpBtn.classList.contains('voted')) {
-            thumbUp--;
-            thumbUpCount.innerText = thumbUp;
-            thumbUpBtn.classList.remove('voted');
-            localStorage.removeItem('vote');
-            localStorage.removeItem('hasVoted');
-            thumbDownBtn.disabled = false;
-          } else {
-            thumbUp++;
-            thumbUpCount.innerText = thumbUp;
-            thumbUpBtn.classList.add('voted');
-            localStorage.setItem('hasVoted', true);
-            localStorage.setItem('vote', 'thumb-up');
-            thumbDownBtn.disabled = true;
-          }
-        });
-      
-        thumbDownBtn.addEventListener('click', () => {
-          if (thumbDownBtn.classList.contains('voted')) {
-            thumbDown--;
-            thumbDownCount.innerText = thumbDown;
-            thumbDownBtn.classList.remove('voted');
-            localStorage.removeItem('vote');
-            localStorage.removeItem('hasVoted');
-            thumbUpBtn.disabled = false;
-          } else {
-            thumbDown++;
-            thumbDownCount.innerText = thumbDown;
-            thumbDownBtn.classList.add('voted');
-            localStorage.setItem('hasVoted', true);
-            localStorage.setItem('vote', 'thumb-down');
-            thumbUpBtn.disabled = true;
-          }
-        });
-      
-        // Add mouseover event listeners to the thumb-up and thumb-down buttons
-        thumbUpBtn.addEventListener('mouseover', () => {
-          if (thumbDownBtn.disabled) {
-            thumbDownBtn.disabled = false;
-            localStorage.removeItem('vote');
-          }
-        });
-      
-        thumbDownBtn.addEventListener('mouseover', () => {
-          if (thumbUpBtn.disabled) {
-            thumbUpBtn.disabled = false;
-            localStorage.removeItem('vote');
-          }
-        });
+      // Hide the pop-up
+      var popup = document.getElementById("myPopup4");
+      popup.style.display = "none";
+    }
 
     const d = new Date();
     document.getElementById("time").innerHTML = d;
