@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Admin Post Page</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  	<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
+  <style>
+    h1 {
+      color: black;
+      font-size: 50px;
+      font-family: 'Times New Roman';
+      text-align: center;
+    }
+
+    body {
+      background-color: cornsilk;
+      text-align: center;
+    }
+
+    .resize {
+      width: 20em;
+      height: 10em;
+    }
+
+    #title {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #content {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #media {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    #submit {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Add styling for the pop-up */
+    .popup {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+    }
+
+    /* Add styling for the pop-up content */
+    .popup-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      /* Set width */
+    }
+
+    /* Add styles for the close button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Make a Post</h1>
+  <!-- The form for gathering the information -->
+  <!-- Assume the form inputs have id's of "title", "content", and "file" -->
+  <form>
+    <h3><label for="title">Post Title:</label></h3>
+    <input type="text" id="title" placeholder="Enter title">
+    <h3><label for="content">Details:</label></h3>
+
+    <label for="template">Page Template:</label>
+			<select id="template" name="template">
+				<option value="template1">Template 1</option>
+				<option value="template2">Template 2</option>
+				<option value="template3">Template 3</option>
+			</select>
+  
+    <label for="Accessbility">Accessibility:</label>
+			<select id="template" name="template">
+				<option value="AdminOnly">Admins Only</option>
+				<option value="Everyone">Everyone</option>
+      </select>
+    
+    <br><br>
+		<h3><label for="post-content">Content:</label></h3>
+		<textarea id="post-content" name="post-content"></textarea>
+		<script>
+			CKEDITOR.replace('post-content');
+		</script>
+
+    <button type="button" onclick="showPopup()">Submit</button>
+  </form>
+
+  <!-- The pop-up -->
+  <div id="myPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="hidePopup()">&times;</span>
+      <p>
+      <h1>Submit Post?</h1>
+      <p><strong>
+          <h2>Title: </h2>
+        </strong><span id="displayTitle"></span></p>
+      <p><strong>Content: </strong><span id="displayContent"></span></p>
+      <p><strong>File: </strong><span id="displayFile"></span></p>
+      <button type="button" onclick="showPopup2(), hidePopup()">Post!</button>
+      <button type="button" onclick="showPopup4(), hidePopup()">Comment</button>
+      <button type="button" onclick="hidePopup2(), hidePopup()">Edit</button>
+      <button type="button" onclick="deletePost(), hidePopup()">Delete</button>
+      <!-- Button click Hide pop-up(s) to be replaced with post to feed when we have a feed -->
+    </div>
+  </div>
+
+  <div id="myPopup2" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="hidePopup()">&times;</span>
+      <p><strong>
+          <h2>Post Submitted!</h2>
+        </strong><span id="displaySuccess"></span></p>
+      <p>Submission Successful as of:</p>
+      <p id="time"></p>
+      <button type="button" onclick="hidePopup2(), hidePopup()">Return to Feed</button>
+      <!-- Hide pop-up(s) to be replaced with return to feed when we have a feed -->
+    </div>
+  </div>
+  
+  <div id="myPopup3" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="hidePopup1()">&times;</span>
+      <p><strong>
+          <h2>Permanent delete?</h2>    
+        <button type="button" onclick="hideDelete(), hidePopup2(), hidePopup()">Delete</button>
+        <button type="button" onclick="hideDelete()">Cancel</button>
+      <!-- Hide pop-up(s) to be replaced with return to feed when we have a feed -->
+    </div>
+  </div>
+
+  <div id="myPopup4" class="popup">
+      <div class="popup-content">
+          <span class="close" onclick="hidePopup()">&times;</span>
+          <p><strong>
+        
+            <h1>Comment:</h1>
+            <textarea id="content" placeholder="Enter content"></textarea>
+            <label for="file">
+            <p>Add Media:</p>
+            <input type="file" id="file" accept="image/*">
+            <br><br>
+            <button type="button" onclick="hideDelete(), hidePopup2(), hidePopup(), hidePopup4()">Submit</button>
+            
+          </strong></p>
+      </div>
+  </div>
+  
+  <div id="myPopup3" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="hidePopup1()">&times;</span>
+      <p><strong>
+          <h2>Permanent delete?</h2>    
+        <button type="button" onclick="hideDelete(), hidePopup2(), hidePopup()">Delete</button>
+        <button type="button" onclick="hideDelete()">Cancel</button>
+      <!-- Hide pop-up(s) to be replaced with return to feed when we have a feed -->
+    </div>
+  </div>
+
+  <!-- JavaScript to display and hide the pop-up -->
+  <script>
+    function showPopup() {
+      // Get the input values
+      var title = document.getElementById("title").value;
+      var content = document.getElementById("content").value;
+      var file = document.getElementById("file").value;
+
+
+      // Display the input values in the pop-up
+      document.getElementById("displayTitle").innerHTML = title;
+      document.getElementById("displayContent").innerHTML = content;
+      document.getElementById("displayFile").innerHTML = file;
+
+      // Show the
+      // Show the pop-up
+      var popup = document.getElementById("myPopup");
+      popup.style.display = "block";
+    }
+
+    function hidePopup() {
+      // Hide the pop-up
+      var popup = document.getElementById("myPopup");
+      popup.style.display = "none";
+    }
+
+    function showPopup2() {
+      // Get the input values
+      var title = document.getElementById("title").value;
+      var content = document.getElementById("content").value;
+      var file = document.getElementById("file").value;
+
+
+      // Display the input values in the pop-up
+      document.getElementById("displayTitle").innerHTML = title;
+      document.getElementById("displayContent").innerHTML = content;
+      document.getElementById("displayFile").innerHTML = file;
+
+      // Show the
+      // Show the pop-up
+      var popup = document.getElementById("myPopup2");
+      popup.style.display = "block";
+    }
+
+    function hidePopup2() {
+      // Hide the pop-up
+      var popup = document.getElementById("myPopup2");
+      popup.style.display = "none";
+    }
+    
+    function deletePost() {
+      // Get the input values
+      var title = document.getElementById("title").value;
+      var content = document.getElementById("content").value;
+      var file = document.getElementById("file").value;
+
+
+      // Display the input values in the pop-up
+      document.getElementById("displayTitle").innerHTML = title;
+      document.getElementById("displayContent").innerHTML = content;
+      document.getElementById("displayFile").innerHTML = file;
+
+      // Show the
+      // Show the pop-up
+      var popup = document.getElementById("myPopup3");
+      popup.style.display = "block";
+      
+    }
+    function hideDelete() {
+      // Hide the pop-up
+      var popup = document.getElementById("myPopup3");
+      popup.style.display = "none";
+    }
+
+    function showPopup4() {
+        // Get the input values
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+        var file = document.getElementById("file").value;
+
+
+        // Display the input values in the pop-up
+        document.getElementById("displayTitle").innerHTML = title;
+        document.getElementById("displayContent").innerHTML = content;
+        document.getElementById("displayFile").innerHTML = file;
+
+        // Show the
+        // Show the pop-up3
+        var popup = document.getElementById("myPopup4");
+        popup.style.display = "block";
+    }
+    function hidePopup4() {
+        // Hide the pop-up
+        var popup = document.getElementById("myPopup4");
+        popup.style.display = "none";
+        }
+
+    const d = new Date();
+    document.getElementById("time").innerHTML = d;
+  </script>
+</body>
+
+</html>
